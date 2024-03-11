@@ -23,7 +23,7 @@ const App = () => {
         </div>
 
         <div>
-          <textarea/>
+          <textarea disabled/>
         </div>
         </div>
         {/*Alt Kisim */}
