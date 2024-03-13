@@ -1,31 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getLanguages } from "../actions/translateActions";
+import { translateText } from "../actions/translateActions";
 
 const initialState = {
   isLoading: false,
   isError: false,
-  languages: [],
+  answer: "",
 };
 
 const translateSlice = createSlice({
   name: "translate",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(getLanguages.pending,(state)=>{
-      state.isLoading=true;
-
-    })
-
-    builder.addCase(getLanguages.rejected,(state,action)=>{
-      state.isLoading=false;
-      state.isError=true;
-    })
-
-    builder.addCase(getLanguages.fulfilled,(state,action)=>{
-      state.isError=false;
-      state.isLoading=false;
-      state.languages=action.payload;
-    })
+    builder.addCase(translateText.pending, (state) => {
+      state.isLoading = true;
+      state.answer = "";
+    });
+    builder.addCase(translateText.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    builder.addCase(translateText.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.answer = action.payload;
+    });
   },
 });
 
