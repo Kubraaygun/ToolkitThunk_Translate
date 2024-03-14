@@ -25,6 +25,12 @@ const translateSlice = createSlice({
       state.answer = action.payload;
     });
   },
-});
 
+  reducers: {
+    setAnswer: (state, action) => {
+      state.answer = action.payload;
+    },
+  },
+});
+export const { setAnswer } = translateSlice.actions;
 export default translateSlice.reducer;

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLanguages, translateText } from "./redux/actions/translateActions";
 import Select from "react-select";
+import { setAnswer } from "./redux/slices/translateSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,10 +40,25 @@ const App = () => {
     [languageSlice.languages]
   );
 
+  const handleSwap=()=>{
+    //Selectleri degistirir
+setSourceLang(targetLang);
+setTargetLang(sourceLang);
+
+//cevap textarea'sinda veriyi diger textarea'ya aktar
+
+setText(translateSlice.answer);
+
+//soru textarea'sinda veriyi cevap textarea'ya aktar
+dispatch(setAnswer(text))
+
+
+  }
+
   return (
     <div id="main-page">
       <div className="container">
-        <h1>Ceviri+</h1>
+        <h1>Çeviri+</h1>
         {/* Ust Kisim */}
         <div className="upper">
           <Select
@@ -50,13 +66,17 @@ const App = () => {
             onChange={setSourceLang}
             className="select"
             options={data}
+            isLoading={languageSlice.isLoading}
+            isDisabled={languageSlice.isLoading}
           />
-          <button>Degis</button>
+          <button onClick={handleSwap}>Değiş</button>
           <Select
             value={targetLang}
             onChange={setTargetLang}
             className="select"
             options={data}
+            isLoading={languageSlice.isLoading}
+            isDisabled={languageSlice.isLoading}
           />
         </div>
         {/*Orta Kisim */}
@@ -67,6 +87,16 @@ const App = () => {
 
           <div>
             <textarea disabled value={translateSlice.answer} />
+            {translateSlice.isLoading && (
+            <div className="wrapper">
+
+<div className="typewriter">
+    <div className="slide"><i></i></div>
+    <div className="paper"></div>
+    <div className="keyboard"></div>
+</div>
+            </div>
+          )}
           </div>
         </div>
         {/*Alt Kisim */}
@@ -75,7 +105,7 @@ const App = () => {
             dispatch(translateText({ text, sourceLang, targetLang }))
           }
         >
-          cevir
+          Çevir
         </button>
       </div>
     </div>
