@@ -32,4 +32,4 @@ Bu avantajlar sayesinde Redux Toolkit Thunk, Redux uygulamalarında asenkron iş
 
 <h2>Ekran Görüntüsü</h2>
 
-![]()
+![](./public/translateApp.gif)
