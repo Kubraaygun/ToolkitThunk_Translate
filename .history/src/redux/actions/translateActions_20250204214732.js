@@ -32,7 +32,7 @@ export const translateText = createAsyncThunk(
       url: "https://text-translator2.p.rapidapi.com/translate",
       headers: {
         "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Key": "937115946amsh313633b3451c2aep10b6c1jsnbbaf8d60e3c7",
         "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
       },
       data: params,
